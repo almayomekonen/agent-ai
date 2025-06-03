@@ -11,16 +11,16 @@ export default function TipCard() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
+          width="18"
+          height="18"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          strokeWidth={2}
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth={2}
             d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
           />
         </svg>
@@ -33,16 +33,16 @@ export default function TipCard() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
+          width="18"
+          height="18"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          strokeWidth={2}
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth={2}
             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
           />
         </svg>
@@ -55,16 +55,16 @@ export default function TipCard() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
+          width="18"
+          height="18"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          strokeWidth={2}
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth={2}
             d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
           />
         </svg>
@@ -73,69 +73,88 @@ export default function TipCard() {
   ];
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-100 shadow-sm hover:shadow transition-all">
+    <div className="bg-gradient-to-r mt-8 from-blue-900/40 via-indigo-900/30 to-purple-900/40 backdrop-blur-sm rounded-xl border border-blue-500/20 shadow-lg hover:shadow-xl transition-all duration-300">
       <div
-        className="flex justify-between items-center cursor-pointer"
+        className="flex justify-between items-center cursor-pointer p-4 sm:p-5"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <h2 className="text-lg font-medium text-blue-800 flex items-center">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0 border border-blue-400/30">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              className="sm:w-5 sm:h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <div className="min-w-0 flex-1">
+            <h2 className="text-blue-100 font-medium text-sm sm:text-base leading-tight">
+              טיפים לשיחה מוצלחת עם הסוכן החכם
+            </h2>
+          </div>
+        </div>
+
+        <div className="flex-shrink-0 ml-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
+            width="18"
+            height="18"
+            className="sm:w-5 sm:h-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            className="text-blue-600 mr-2"
+            strokeWidth={2}
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2}
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              className={`text-blue-300 transition-transform duration-300 ${
+                isExpanded ? "transform rotate-180" : ""
+              }`}
+              d="M19 9l-7 7-7-7"
             />
           </svg>
-          טיפים לשיחה מוצלחת עם הסוכן החכם
-        </h2>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          className={`text-blue-600 transition-transform duration-300 ${
-            isExpanded ? "transform rotate-180" : ""
-          }`}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        </div>
       </div>
 
       {isExpanded && (
-        <div className="mt-4 space-y-4">
+        <div className="px-4 pb-4 sm:px-5 sm:pb-5 space-y-4">
           {tips.map((tip, index) => (
-            <div key={index} className="flex gap-3 items-start">
-              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-blue-600">{tip.icon}</span>
+            <div key={index} className="flex gap-3 items-start group">
+              <div className="w-8 h-8 bg-blue-500/10 rounded-full flex items-center justify-center flex-shrink-0 border border-blue-400/20 group-hover:bg-blue-500/20 transition-colors">
+                <span className="text-blue-300 group-hover:text-blue-200 transition-colors">
+                  {tip.icon}
+                </span>
               </div>
-              <div>
-                <h3 className="font-medium text-blue-900">{tip.title}</h3>
-                <p className="text-sm text-blue-700 mt-1">{tip.description}</p>
+              <div className="min-w-0 flex-1">
+                <h3 className="font-medium text-blue-100 text-sm sm:text-base mb-1 group-hover:text-white transition-colors">
+                  {tip.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-blue-200/80 leading-relaxed group-hover:text-blue-100/90 transition-colors">
+                  {tip.description}
+                </p>
               </div>
             </div>
           ))}
 
-          <div className="bg-blue-100 p-3 rounded-lg mt-4">
-            <p className="text-sm text-blue-800 font-medium">
-              💡 טיפ מתקדם: תוכל ללחוץ על כפתור &quot;צור One Pager עכשיו&quot;
-              בכל שלב אם אתה מרגיש שסיפקת מספיק מידע.
-            </p>
+          <div className="bg-blue-500/10 backdrop-blur-sm p-3 sm:p-4 rounded-lg mt-4 border border-blue-400/20">
+            <div className="flex items-start gap-2">
+              <span className="text-lg flex-shrink-0 mt-0.5">💡</span>
+              <p className="text-xs sm:text-sm text-blue-100 font-medium leading-relaxed">
+                <strong>טיפ מתקדם:</strong> תוכל ללחוץ על כפתור &quot;צור One
+                Pager עכשיו&quot; בכל שלב אם אתה מרגיש שסיפקת מספיק מידע.
+              </p>
+            </div>
           </div>
         </div>
       )}
