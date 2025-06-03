@@ -9,6 +9,7 @@ import ConversationHistory from "./ConversationHistory";
 import TipCard from "./TipCard";
 import ThinkingIndicator from "../ui/isThinking";
 import { useConversationStore } from "@/lib/conversationStore";
+import Image from "next/image";
 
 const ProfessionalOnePagerDisplay = dynamic(
   () => import("../pdf/ProfessionalOnePagerDisplay"),
@@ -269,12 +270,28 @@ export default function InteractiveAgent() {
     "שלום! ספר לי מה המיזם שלך?";
 
   return (
-    <main className="min-h-[100dvh] flex flex-col">
-      <div className="flex-1 overflow-y-auto px-3 sm:px-8 pb-32 md:pb-28">
-        <div className="max-w-4xl mx-auto space-y-6 pt-4 sm:pt-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-center bg-gradient-to-r from-orange-400 to-pink-500 text-transparent bg-clip-text break-words">
-            🚀 סוכן מדבר - One Pager
-          </h1>
+    <main className="min-h-[100dvh] flex flex-col relative">
+      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
+        <div className="relative group cursor-pointer">
+          <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-lg blur opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+
+          <Image
+            src="/methodian.png"
+            alt="Methodian"
+            width={300}
+            height={300}
+            className="relative w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-contain rounded-lg drop-shadow-lg transform transition-transform duration-300 group-hover:scale-105"
+          />
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-3 sm:px-8 pb-32 md:pb-28 pt-28 sm:pt-36 md:pt-40 lg:pt-44">
+        <div className="max-w-4xl mx-auto space-y-6">
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="text-2xl sm:text-3xl font-bold text-center bg-gradient-to-r from-orange-400 to-pink-500 text-transparent bg-clip-text break-words mb-4">
+              🚀 סוכן מדבר - One Pager
+            </h1>
+          </div>
 
           {!isFinished && (
             <div className="w-full bg-gray-200 rounded-full h-2.5 mb-6 sm:mb-10">

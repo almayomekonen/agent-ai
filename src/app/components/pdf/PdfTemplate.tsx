@@ -3,6 +3,7 @@
 import React from "react";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import type { OnePagerData } from "@/app/types/onepager";
+import Image from "next/image";
 
 const styles = StyleSheet.create({
   page: {
@@ -286,6 +287,25 @@ const PdfTemplate = ({ data }: PdfTemplateProps) => {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
+          <View
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0.2)",
+              padding: 15,
+              borderRadius: 12,
+              alignSelf: "center",
+              marginBottom: 15,
+            }}
+          >
+            <Image
+              alt="methodian logo"
+              src="/methodian.png"
+              width={150}
+              height={150}
+              style={{
+                alignSelf: "center",
+              }}
+            />
+          </View>
           <Text style={styles.headerTitle}>One Pager יזמי 🚀</Text>
           <Text style={styles.headerSubtitle}>תמצית אסטרטגית מקצועית</Text>
         </View>
@@ -410,7 +430,38 @@ const PdfTemplate = ({ data }: PdfTemplateProps) => {
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>נוצר בתאריך: {currentDate}</Text>
-          <Text style={styles.footerBrand}>Methodian AI</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "rgba(59, 130, 246, 0.1)",
+              padding: 8,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: "rgba(59, 130, 246, 0.2)",
+            }}
+          >
+            <Image
+              alt="methodian logo"
+              src="/methodian.png"
+              width={60}
+              height={60}
+              style={{
+                width: 60,
+                marginRight: 8,
+              }}
+            />
+            <Text
+              style={{
+                ...styles.footerBrand,
+                fontSize: 14,
+                letterSpacing: 0.5,
+              }}
+            >
+              Methodian AI
+            </Text>
+          </View>
         </View>
       </Page>
     </Document>

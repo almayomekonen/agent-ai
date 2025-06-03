@@ -9,10 +9,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "סוכן AI ל-One Pager",
+  title: "Methodian AI - One Pager",
   description: "יצירת דוחות עסקיים חכמים בזמן אמת באמצעות שיחה עם יזם.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/methodian.png",
   },
 };
 
@@ -27,14 +27,14 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
-          content="יצירת דוחות עסקיים חכמים בזמן אמת באמצעות שיחה עם יזם."
+          content="יצירת דוחות עסקיים חכמים בזמן אמת באמצעות שיחה עם יזם על ידי Methodian AI."
         />
         <meta
           name="keywords"
-          content="One Pager, סוכן AI, יזם, דוח עסקי, שיחה עם יזם"
+          content="One Pager, סוכן AI, יזם, דוח עסקי, שיחה עם יזם, Methodian, מתודיאן"
         />
 
-        <link rel="icon" href="/agent.png" />
+        <link rel="icon" href="/methodian.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans bg-background text-foreground`}
