@@ -2,17 +2,154 @@ interface AgentQuestionProps {
   question: string;
 }
 
+// מיפוי נושאים לאייקונים, שמות תצוגה וצבעים
+const topicMap: Record<
+  string,
+  { icon: string; label: string; colorClass: string }
+> = {
+  מיזם: {
+    icon: "🚀",
+    label: "על המיזם",
+    colorClass: "from-blue-500 to-indigo-600",
+  },
+  תיאור: {
+    icon: "📝",
+    label: "תיאור המיזם",
+    colorClass: "from-blue-500 to-indigo-600",
+  },
+  עושה: {
+    icon: "🔍",
+    label: "על המיזם",
+    colorClass: "from-blue-500 to-indigo-600",
+  },
+  חזון: {
+    icon: "🔭",
+    label: "חזון ומטרה",
+    colorClass: "from-purple-500 to-indigo-600",
+  },
+  מטרה: {
+    icon: "🎯",
+    label: "חזון ומטרה",
+    colorClass: "from-purple-500 to-indigo-600",
+  },
+  ערכים: {
+    icon: "💎",
+    label: "ערכי ליבה",
+    colorClass: "from-pink-500 to-purple-600",
+  },
+  עקרונות: {
+    icon: "⚖️",
+    label: "ערכי ליבה",
+    colorClass: "from-pink-500 to-purple-600",
+  },
+  מודל: {
+    icon: "💰",
+    label: "מודל עסקי",
+    colorClass: "from-emerald-500 to-teal-600",
+  },
+  עסקי: {
+    icon: "💼",
+    label: "מודל עסקי",
+    colorClass: "from-emerald-500 to-teal-600",
+  },
+  הכנסה: {
+    icon: "💵",
+    label: "מודל עסקי",
+    colorClass: "from-emerald-500 to-teal-600",
+  },
+  הישג: {
+    icon: "🏆",
+    label: "הישגים",
+    colorClass: "from-amber-500 to-orange-600",
+  },
+  "אבן דרך": {
+    icon: "📊",
+    label: "אבני דרך",
+    colorClass: "from-amber-500 to-orange-600",
+  },
+  פעולה: {
+    icon: "🔔",
+    label: "קריאה לפעולה",
+    colorClass: "from-red-500 to-orange-600",
+  },
+  יעד: { icon: "📣", label: "קהל יעד", colorClass: "from-blue-400 to-sky-500" },
+  לקוח: {
+    icon: "👥",
+    label: "קהל יעד",
+    colorClass: "from-blue-400 to-sky-500",
+  },
+  תחרות: {
+    icon: "⚔️",
+    label: "תחרות בשוק",
+    colorClass: "from-rose-500 to-red-600",
+  },
+  מתחרים: {
+    icon: "🥊",
+    label: "תחרות בשוק",
+    colorClass: "from-rose-500 to-red-600",
+  },
+  טכנולוגיה: {
+    icon: "⚙️",
+    label: "טכנולוגיה",
+    colorClass: "from-gray-500 to-slate-600",
+  },
+  פתרון: {
+    icon: "💡",
+    label: "הפתרון",
+    colorClass: "from-yellow-400 to-amber-500",
+  },
+  בעיה: {
+    icon: "🔧",
+    label: "הבעיה והפתרון",
+    colorClass: "from-yellow-400 to-amber-500",
+  },
+  אתגר: {
+    icon: "🧩",
+    label: "אתגרים",
+    colorClass: "from-fuchsia-500 to-pink-600",
+  },
+};
+
+// פונקציה לזיהוי הנושא מתוך השאלה
+function identifyTopic(question: string): {
+  icon: string;
+  label: string;
+  colorClass: string;
+} {
+  // הסר את הפרפיקס "סוכן: " אם קיים
+  const cleanQuestion = question.replace(/^סוכן: /, "").toLowerCase();
+
+  // בדוק אם אחד ממילות המפתח קיים בשאלה
+  for (const [keyword, details] of Object.entries(topicMap)) {
+    if (cleanQuestion.includes(keyword.toLowerCase())) {
+      return details;
+    }
+  }
+
+  // ברירת מחדל אם לא נמצא נושא ספציפי
+  return {
+    icon: "💬",
+    label: "שאלה נוספת",
+    colorClass: "from-blue-500 to-indigo-600",
+  };
+}
+
 export default function AgentQuestion({ question }: AgentQuestionProps) {
+  const { icon, label, colorClass } = identifyTopic(question);
+
   return (
     <div className="relative">
-      <div className="absolute -left-4 -top-4 bg-blue-500 rounded-full p-2 shadow-lg shadow-blue-500/20">
+      <div
+        className={`absolute -left-5 -top-5 bg-gradient-to-br ${colorClass} rounded-full p-2.5 shadow-lg animate-pulse-slow`}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
+          width="22"
+          height="22"
           fill="none"
           viewBox="0 0 24 24"
-          stroke="currentColor"
+          stroke="white"
+          className="animate-pulse-slow"
         >
           <path
             strokeLinecap="round"
@@ -22,8 +159,24 @@ export default function AgentQuestion({ question }: AgentQuestionProps) {
           />
         </svg>
       </div>
-      <div className="bg-gradient-to-r from-blue-500/10 to-indigo-500/10 backdrop-blur-sm rounded-xl p-5 pl-6 shadow-xl border border-blue-500/20">
-        <p className="text-white font-medium">{question}</p>
+      <div
+        className={`bg-gradient-to-r from-blue-500/10 to-indigo-500/10 backdrop-blur-sm rounded-xl p-5 pl-7 shadow-xl border border-blue-500/20 hover:shadow-lg transition-all`}
+      >
+        <div className="flex items-center gap-3">
+          <span
+            className="text-3xl transition-all"
+            role="img"
+            aria-label={label}
+          >
+            {icon}
+          </span>
+          <div>
+            <p className="text-white font-medium text-lg">{label}</p>
+            <p className="text-blue-200/80 text-sm mt-0.5 font-light line-clamp-2 hover:line-clamp-none transition-all">
+              {question.replace(/^סוכן: /, "")}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
