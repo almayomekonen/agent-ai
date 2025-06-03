@@ -1,16 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { OnePagerData } from "../types/onepager";
+import { OnePagerData } from "@/app/types/onepager";
 import dynamic from "next/dynamic";
 
-// דינאמי כדי למנוע בעיות רנדור בצד שרת
 const PDFViewer = dynamic(
   () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
   { ssr: false }
 );
 
-const EnhancedPdfTemplate = dynamic(() => import("./PdfTemplate"), {
+const PdfTemplate = dynamic(() => import("@/app/components/pdf/PdfTemplate"), {
   ssr: false,
 });
 
@@ -22,7 +21,6 @@ export default function PdfPreview({ data }: PdfPreviewProps) {
   const [isClient, setIsClient] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // הפעל רק בצד הלקוח
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -44,7 +42,6 @@ export default function PdfPreview({ data }: PdfPreviewProps) {
 
   return (
     <div className={containerClasses}>
-      {/* כפתור מסך מלא */}
       <button
         onClick={() => setIsFullscreen(!isFullscreen)}
         className="absolute top-2 right-2 z-10 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-all"
@@ -85,7 +82,6 @@ export default function PdfPreview({ data }: PdfPreviewProps) {
         )}
       </button>
 
-      {/* PDF Viewer */}
       <PDFViewer
         width="100%"
         height="100%"
@@ -94,7 +90,7 @@ export default function PdfPreview({ data }: PdfPreviewProps) {
           borderRadius: isFullscreen ? "0" : "0.5rem",
         }}
       >
-        <EnhancedPdfTemplate data={data} />
+        <PdfTemplate data={data} />
       </PDFViewer>
     </div>
   );

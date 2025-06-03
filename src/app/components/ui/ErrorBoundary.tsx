@@ -37,10 +37,12 @@ export class ErrorBoundary extends React.Component<
               נתקלנו בשגיאה בלתי צפויה. אנא רענן את הדף ונסה שוב.
             </p>
             <button
-              onClick={() => window.location.reload()}
+              onClick={() =>
+                this.setState({ hasError: false, error: undefined })
+              }
               className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              רענן דף
+              נסה שוב
             </button>
           </div>
         </div>

@@ -1,3 +1,7 @@
+"use client";
+
+import React, { useEffect, useRef } from "react";
+
 interface ConversationHistoryProps {
   messages: string[];
 }
@@ -5,6 +9,13 @@ interface ConversationHistoryProps {
 export default function ConversationHistory({
   messages,
 }: ConversationHistoryProps) {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // 🚀 Auto scroll למטה כשמגיעה הודעה חדשה
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <div className="space-y-2">
       <h2 className="text-xl font-semibold text-orange-400 flex items-center gap-2">
@@ -38,6 +49,9 @@ export default function ConversationHistory({
           {msg}
         </div>
       ))}
+
+      {/* 🎯 הנקודה שה-scroll יגיע אליה */}
+      <div ref={messagesEndRef} />
     </div>
   );
 }

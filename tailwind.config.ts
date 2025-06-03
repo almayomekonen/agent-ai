@@ -33,6 +33,7 @@ const config: Config = {
       animation: {
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         gradient: "gradient 8s linear infinite",
+        fadeIn: "fadeIn 0.5s ease-in-out",
       },
       keyframes: {
         gradient: {
@@ -44,6 +45,10 @@ const config: Config = {
             "background-size": "200% 200%",
             "background-position": "right center",
           },
+        },
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
       },
       backgroundImage: {

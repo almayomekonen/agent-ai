@@ -1,17 +1,15 @@
 "use client";
 
 import React, { MutableRefObject, useState } from "react";
-import type { OnePagerData } from "../types/onepager";
+import type { OnePagerData } from "@/app/types/onepager";
 import dynamic from "next/dynamic";
 
-// חשוב: ייבוא דינאמי של קומפוננטות שמשתמשות ב-@react-pdf/renderer
-// לפתרון בעיית ESM module
 const PDFDownloadLink = dynamic(
   () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
   { ssr: false }
 );
 
-const EnhancedPdfTemplate = dynamic(() => import("./PdfTemplate"), {
+const PdfTemplate = dynamic(() => import("@/app/components/pdf/PdfTemplate"), {
   ssr: false,
 });
 
@@ -49,7 +47,7 @@ export default function OnePagerDisplay({
   );
 
   // טוען את תצוגת ה-PDF רק כשצריך
-  const PdfPreview = dynamic(() => import("./PdfPreview"), {
+  const PdfPreview = dynamic(() => import("@/app/components/pdf/PdfTemplate"), {
     ssr: false,
     loading: () => (
       <div className="w-full h-96 flex items-center justify-center bg-gray-100 rounded-lg">
@@ -268,7 +266,7 @@ export default function OnePagerDisplay({
               </p>
               {typeof window !== "undefined" && (
                 <PDFDownloadLink
-                  document={<EnhancedPdfTemplate data={onePager} />}
+                  document={<PdfTemplate data={onePager} />}
                   fileName={`OnePager-${
                     new Date().toISOString().split("T")[0]
                   }.pdf`}
